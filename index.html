@@ -430,6 +430,7 @@
     </div>
     
     <form name = "AdmissionForm" method ="POST" enctype="multipart/form-data" data-netlify="true" id="admissionForm">
+       <input type="hidden" name="form-name" value="AdmissionForm">
       <div class="form-section" id="personalDetailsSection">
         <h2><i class="fas fa-user"></i> Personal Information</h2>
         <div class="form-row">
@@ -633,7 +634,7 @@
           <p><strong>Amount Paid:</strong> <span id="receiptAmount"></span></p>
           <p><strong>Payment Date:</strong> <span id="receiptPaymentDate"></span></p>
         </div>
-        <input type="hidden" name="form-name" value="contact">
+       
         <p>A copy of this receipt has been sent to your email address. Please bring a copy of this receipt on your first day.</p>
         
         <button type="button" id="printReceipt">
@@ -668,21 +669,35 @@
       
       // Program pricing
       const programPrices = {
-        'basic': '₹5,000',
-        'intermediate': '₹8,000',
-        'advanced': '₹12,000',
-        'therapeutic': '₹15,000',
-        'retreat': '₹25,000'
+        'yoga': '₹5,000'
       };
       
       const programNames = {
-        'basic': 'Basic Yoga',
-        'intermediate': 'Intermediate Yoga',
-        'advanced': 'Advanced Yoga',
-        'therapeutic': 'Therapeutic Yoga',
-        'retreat': '7-Day Retreat'
+        'yoga': 'Full Yoga'
       };
-      
+      //form handling
+      document.getElementById("admissionForm").addEventListener("submit", function(e) {
+  e.preventDefault(); // Stop page reload
+
+  const form = e.target;
+  const data = new FormData(form);
+
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(data).toString()
+  })
+  .then(() => {
+    console.log("Data tranfer to Netlify successfully.");
+  })
+  .catch((error) => {
+    // Optionally log the error (can also leave this blank)
+    console.error("Form submission error:", error);
+  });
+
+  // Your code continues execution here — nothing is blocked
+});
+
       // Update payment amount when program changes
       programSelect.addEventListener('change', function() {
         const selectedProgram = this.value;
@@ -814,27 +829,6 @@
         });
       });
 
-document.getElementById("admissionForm").addEventListener("submit", function(e) {
-  e.preventDefault(); // Stop page reload
-
-  const form = e.target;
-  const data = new FormData(form);
-
-  fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams(data).toString()
-  })
-  .then(() => {
-    // Do nothing — no message, no redirect, no UI change
-  })
-  .catch((error) => {
-    // Optionally log the error (can also leave this blank)
-    console.error("Form submission error:", error);
-  });
-
-  // Your code continues execution here — nothing is blocked
-});
 
     });
   </script>
