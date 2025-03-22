@@ -633,7 +633,7 @@
           <p><strong>Amount Paid:</strong> <span id="receiptAmount"></span></p>
           <p><strong>Payment Date:</strong> <span id="receiptPaymentDate"></span></p>
         </div>
-        
+        <input type="hidden" name="form-name" value="contact">
         <p>A copy of this receipt has been sent to your email address. Please bring a copy of this receipt on your first day.</p>
         
         <button type="button" id="printReceipt">
@@ -814,7 +814,7 @@
         });
       });
 
-document.getElementById("contact-form").addEventListener("submit", function(e) {
+document.getElementById("admissionForm").addEventListener("submit", function(e) {
   e.preventDefault(); // Stop page reload
 
   const form = e.target;
