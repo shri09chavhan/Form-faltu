@@ -430,7 +430,7 @@
     </div>
     
     <form name = "AdmissionForm" method ="POST" enctype="multipart/form-data" data-netlify="true" id="admissionForm">
-       <input type="hidden" name="form-name" value="AdmissionForm">
+       <input type="hidden" name="AdmissionForm" value="AdmissionForm">
       <div class="form-section" id="personalDetailsSection">
         <h2><i class="fas fa-user"></i> Personal Information</h2>
         <div class="form-row">
@@ -519,8 +519,8 @@
             <label for="program">Select Program *</label>
             <select id="program" name="program" required>
               <option value="">-- Select --</option>
-              <option value="basic"> Yoga (₹200)</option>
-            
+              <option value="basic">Yoga (₹200)</option>
+           
             </select>
           </div>
           <div class="form-group">
@@ -544,7 +544,7 @@
             <label for="accommodation">Accommodation Required</label>
             <select id="accommodation" name="accommodation">
               <option value="no">No</option>
-              <option value="yes">Yes (Additional Charges Apply)</option>
+              <option value="yes">Yes </option>
             </select>
           </div>
         </div>
@@ -595,8 +595,8 @@
           <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi%3A%2F%2Fpay%3Fpa%3Dmandaramrutkar2008%40oksbi%26pn%3DMandar%2520Amrutkar%26aid%3DuGICAgKDSoa7JOg" alt="Payment QR Code">
         </div>
         
-        <p>Amount: <strong id="paymentAmount">₹200</strong></p>
-        <p>Program: <strong id="programName">Full Yoga</strong></p>
+        <p>Amount: <strong id="paymentAmount">₹5,000</strong></p>
+        <p>Program: <strong id="programName">Basic Yoga</strong></p>
         
         <div class="upload-section" id="uploadSection">
           <p>Once payment is complete, please upload the screenshot of payment:</p>
@@ -631,7 +631,7 @@
           <p><strong>Amount Paid:</strong> <span id="receiptAmount"></span></p>
           <p><strong>Payment Date:</strong> <span id="receiptPaymentDate"></span></p>
         </div>
-       
+        
         <p>A copy of this receipt has been sent to your email address. Please bring a copy of this receipt on your first day.</p>
         
         <button type="button" id="printReceipt">
@@ -666,43 +666,21 @@
       
       // Program pricing
       const programPrices = {
-        'yoga': '₹5,000'
+        'basic': '₹200'
       };
       
       const programNames = {
-        'yoga': 'Full Yoga'
+        'basic': 'Full Yoga'
       };
-      //form handling
-      document.getElementById("admissionForm").addEventListener("submit", function(e) {
-  e.preventDefault(); // Stop page reload
-
-  const form = e.target;
-  const data = new FormData(form);
-
-  fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams(data).toString()
-  })
-  .then(() => {
-    console.log("Data tranfer to Netlify successfully.");
-  })
-  .catch((error) => {
-    // Optionally log the error (can also leave this blank)
-    console.error("Form submission error:", error);
-  });
-
-  // Your code continues execution here — nothing is blocked
-});
-
+      
       // Update payment amount when program changes
-     /* programSelect.addEventListener('change', function() {
+      programSelect.addEventListener('change', function() {
         const selectedProgram = this.value;
         if (selectedProgram) {
           paymentAmountEl.textContent = programPrices[selectedProgram];
           programNameEl.textContent = programNames[selectedProgram];
         }
-      });*/
+      });
       
       // Proceed to payment button
       proceedToPaymentBtn.addEventListener('click', function() {
@@ -825,8 +803,6 @@
           this.style.transform = 'scale(1)';
         });
       });
-
-
     });
   </script>
 </body>
