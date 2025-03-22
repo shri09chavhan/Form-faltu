@@ -761,7 +761,7 @@
           document.getElementById('receiptStartDate').textContent = formatDate(startDate);
           document.getElementById('receiptAmount').textContent = programPrices[program];
           document.getElementById('receiptPaymentDate').textContent = formatDate(new Date());
-          
+          form.submit(); // Submits to Netlify
           // Scroll to top
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }, 2000);
