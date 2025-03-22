@@ -609,7 +609,7 @@
             <img id="previewImage" src="#" alt="Payment Screenshot">
           </div>
           
-          <button type="button" id="verifyPayment">
+          <button type="submit" id="verifyPayment">
             <i class="fas fa-check-circle"></i> Verify Payment
           </button>
         </div>
@@ -761,7 +761,7 @@
           document.getElementById('receiptStartDate').textContent = formatDate(startDate);
           document.getElementById('receiptAmount').textContent = programPrices[program];
           document.getElementById('receiptPaymentDate').textContent = formatDate(new Date());
-          form.submit(); // Submits to Netlify
+          //form.submit(); 
           // Scroll to top
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }, 2000);
@@ -803,6 +803,9 @@
           this.style.transform = 'scale(1)';
         });
       });
+      form.addEventListener('submit', () => {
+  console.log('Submitting to Netlify...');
+});
     });
   </script>
 </body>
