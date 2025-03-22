@@ -519,11 +519,8 @@
             <label for="program">Select Program *</label>
             <select id="program" name="program" required>
               <option value="">-- Select --</option>
-              <option value="basic">Basic Yoga (₹5,000)</option>
-              <option value="intermediate">Intermediate Yoga (₹8,000)</option>
-              <option value="advanced">Advanced Yoga (₹12,000)</option>
-              <option value="therapeutic">Therapeutic Yoga (₹15,000)</option>
-              <option value="retreat">7-Day Retreat (₹25,000)</option>
+              <option value="basic"> Yoga (₹200)</option>
+            
             </select>
           </div>
           <div class="form-group">
@@ -598,8 +595,8 @@
           <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi%3A%2F%2Fpay%3Fpa%3Dmandaramrutkar2008%40oksbi%26pn%3DMandar%2520Amrutkar%26aid%3DuGICAgKDSoa7JOg" alt="Payment QR Code">
         </div>
         
-        <p>Amount: <strong id="paymentAmount">₹5,000</strong></p>
-        <p>Program: <strong id="programName">Basic Yoga</strong></p>
+        <p>Amount: <strong id="paymentAmount">₹200</strong></p>
+        <p>Program: <strong id="programName">Full Yoga</strong></p>
         
         <div class="upload-section" id="uploadSection">
           <p>Once payment is complete, please upload the screenshot of payment:</p>
@@ -699,13 +696,13 @@
 });
 
       // Update payment amount when program changes
-      programSelect.addEventListener('change', function() {
+     /* programSelect.addEventListener('change', function() {
         const selectedProgram = this.value;
         if (selectedProgram) {
           paymentAmountEl.textContent = programPrices[selectedProgram];
           programNameEl.textContent = programNames[selectedProgram];
         }
-      });
+      });*/
       
       // Proceed to payment button
       proceedToPaymentBtn.addEventListener('click', function() {
