@@ -340,6 +340,9 @@
       </div>
       
       <form name="yoga-admission" method="POST" data-netlify="true" enctype="multipart/form-data" id="admissionForm">
+        <!-- Netlify form name field (required for Netlify forms) -->
+        <input type="hidden" name="form-name" value="yoga-admission">
+        
         <div class="form-row">
           <div class="form-col">
             <div class="form-group">
@@ -485,7 +488,7 @@
     document.getElementById('admissionForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
-      // Get form values
+      // Get form values for receipt
       const fullName = document.getElementById('fullName').value;
       const email = document.getElementById('email').value;
       const program = document.getElementById('program').value;
@@ -510,28 +513,35 @@
       document.getElementById('receiptProgram').textContent = program;
       document.getElementById('receiptExperience').textContent = experienceText;
       
-      // Submit the form to Netlify
-      const formData = new FormData(this);
-      fetch('/', {
-        method: 'POST',
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString()
-      })
-      .then(() => {
-        console.log('Form successfully submitted to Netlify');
-        
-        // Show receipt
-        document.getElementById('receipt').style.display = 'block';
-        
-        // Scroll to receipt
-        document.getElementById('receipt').scrollIntoView({ behavior: 'smooth' });
-        
-        // Show alert only after successful submission
-        alert('Form submitted successfully! Your admission receipt has been generated.');
-      })
-      .catch((error) => {
-        console.error('Error submitting form:', error);
-      });
+      // For Netlify forms with file uploads, we need to submit the form directly
+      // This is the proper way to handle file uploads with Netlify forms
+      const form = e.target;
+      const formData = new FormData(form);
+      
+      // Submit the form using the browser's native form submission
+      // This is the most reliable way to submit files to Netlify
+      const formAction = form.getAttribute('action') || window.location.href;
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', formAction, true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200 || xhr.status === 201 || xhr.status === 302) {
+            console.log('Form successfully submitted to Netlify');
+            
+            // Show receipt
+            document.getElementById('receipt').style.display = 'block';
+            
+            // Scroll to receipt
+            document.getElementById('receipt').scrollIntoView({ behavior: 'smooth' });
+            
+            // Show alert only after successful submission
+            alert('Form submitted successfully! Your admission receipt has been generated.');
+          } else {
+            console.error('Error submitting form:', xhr.statusText);
+          }
+        }
+      };
+      xhr.send(formData);
     });
     
     // Print receipt
